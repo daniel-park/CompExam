@@ -143,7 +143,7 @@ summary(salary.inv.lm)</code></pre>
 ## Multiple R-squared:  0.2664, Adjusted R-squared:  0.2402 
 ## F-statistic: 10.17 on 1 and 28 DF,  p-value: 0.003506</code></pre>
 <p>Model: <span class="math display">\[
-\widehat{log_salary} = 12.34 + 1.059 \frac{1}{draft}
+\widehat{log\_salary} = 12.34 + 1.059 \frac{1}{draft}
 \]</span> Interpretation:</p>
 <p>When someone is first to be drafted, then his anticipated salary is going to be <span class="math display">\[
 \widehat{log\_salary} = 12.34 + 1.059 / 1 \ \ \ \Longrightarrow \ \ \ salary=e^{12.34 + 1.059} = \$659,344
@@ -153,25 +153,28 @@ summary(salary.inv.lm)</code></pre>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>What does the SLR model in (b) give as the difference in mean <em>log-salary</em> values for <span class="math inline">\(1^{st}\)</span> and <span class="math inline">\(2^{nd}\)</span> round draft picks? Give 95% confidence limits for this difference in means.<br />
 <strong>Solution</strong><br />
-General model: <span class="math inline">\(log\_salary_{draft no.} = \beta_0 + \beta_1 \frac{1}{draft}\)</span><br />
+General model: <span class="math inline">\(log\_salary_{draft \ no.} = \beta_0 + \beta_1 \frac{1}{draft}\)</span><br />
 <span class="math inline">\(log\_salary_{(1st)} = \beta_0 + \beta_1 \frac{1}{1}\)</span><br />
 <span class="math inline">\(log\_salary_{(2nd)} = \beta_0 + \beta_1 \frac{1}{2}\)</span></li>
 </ol>
 <p>The difference in means: <span class="math display">\[
-log\_salary_{(1st)} - log\_salary_{(2nd)} = (\beta_0 + \beta_1) - \beta_0 + \frac{1}{2}\beta_1 = \frac{1}{2}\beta_1
+log\_salary_{(1st)} - log\_salary_{(2nd)} = (\beta_0 + \beta_1) - \Big(\beta_0 + \frac{1}{2}\beta_1\Big) = \frac{1}{2}\beta_1
 \]</span></p>
 <p>95% CI for difference in means: <span class="math display">\[
-\frac{1}{2}\beta_1 \pm t_{.975, 28}\cdot 
-\]</span> Look at this later</p>
+\begin{gather}
+\frac{1}{2}\beta_1 \pm t_{.975, 28}\cdot s_{\beta_1}/2 \\
+\frac{1}{2} \cdot 1.059 \pm 2.048 \frac{0.332}{2} = (0.1895, 0.8695)
+\end{gather}
+\]</span> (Don’t understand)</p>
 <ol start="4" style="list-style-type: lower-alpha">
 <li>Now consider Multiple Linear Regression of <em>log-salary</em>, with terms <em>draft_inv</em>, <em>yrs_exp</em>, <em>played</em>, <em>started</em>, <em>citypop</em>, and percent started <span class="math inline">\(\big(\frac{\text{started}}{\text{played}}\big)\)</span>. Use a stepwise forward selection to find the “best” sub-model (<span class="math inline">\(\alpha=0.1\)</span>). Write down your final fitted model and use it for (e). Check the model assumptions (do NOT change your answers regardless of model assumption results).<br />
 <strong>Solution</strong><br />
 First, create a new column in our data frame to include percent started:</li>
 </ol>
 <pre class="r"><code># pct_start variable must be added in data frame.
-# Dividing it in the model implies nesting
+# Dividing it inside the `lm()` function implies nesting
 salary.df$pct_start &lt;- salary.df$started/salary.df$played </code></pre>
-<p>For forward stepwise regression use this function(source: <a href="http://orinanobworld.blogspot.ca/2011/02/stepwise-regression-in-r.html" class="uri">http://orinanobworld.blogspot.ca/2011/02/stepwise-regression-in-r.html</a>):</p>
+<p>For forward stepwise regression use this function (source: <a href="http://orinanobworld.blogspot.ca/2011/02/stepwise-regression-in-r.html" class="uri">http://orinanobworld.blogspot.ca/2011/02/stepwise-regression-in-r.html</a>):</p>
 <pre class="r"><code>#
 # This is an R function to perform stepwise regression based on a &quot;nested model&quot; F test for inclusion/exclusion
 # of a predictor.  To keep it simple, I made no provision for forcing certain variables to be included in
@@ -253,7 +256,7 @@ stepwise &lt;- function(full.model, initial.model, alpha.to.enter, alpha.to.leav
     break;
   } 
 }</code></pre>
-<p>Forward stepwise selection (<span class="math inline">\(\alpha=0.05\)</span>):</p>
+<p>Forward stepwise selection (<span class="math inline">\(\alpha=0.1\)</span>):</p>
 <pre class="r"><code>attach(salary.df) # allows us to refer to column names w/o referencing the data frame
 stepwise(full.model=log_salary ~ draft_inv + yrs_exp + played + started + citypop + pct_start, initial.model=log_salary ~ 1, alpha.to.enter=.1, alpha.to.leave=.1)</code></pre>
 <pre><code>##             Estimate Std. Error  t value     Pr(&gt;|t|)
@@ -289,54 +292,20 @@ stepwise(full.model=log_salary ~ draft_inv + yrs_exp + played + started + citypo
 ## S = 0.426246, R-sq = 0.681794, R-sq(adj) = 0.645078, C-p = 3.775195
 ## =====</code></pre>
 <pre class="r"><code>detach(salary.df)</code></pre>
+<p>Final Model: <span class="math display">\[
+\widehat{log\_salary} = 11.556 + 0.0905 \cdot \frac{1}{draft} + 0.11796 \cdot yrs\_exp + 0.5811 \cdot pct\_start
+\]</span></p>
 <ol start="5" style="list-style-type: lower-alpha">
 <li>A particular offensive back not included in this data set is a former first round draft pick with 5 years of experience and started 2 out of 7 regular season games in 1990. He was offered a $315,000 contract for 1990 in a city of population 2,000,000. Did this person have a good case that the offer was too low? Explain why or why not.<br />
 <strong>Solution</strong></li>
 </ol>
-<pre class="r"><code>salary.full.lm &lt;- lm(formula=log_salary ~ draft_inv + yrs_exp + played + started + citypop + pct_start, data=salary.df)
-
-predict(object=salary.full.lm, 
-        data.frame(draft_inv=1, yrs_exp=5, played=7, started=2, citypop=2000000, pct_start=2/7))</code></pre>
-<pre><code>##        1 
-## 13.40754</code></pre>
 <pre class="r"><code>best.lm &lt;- lm(formula=log_salary ~ draft_inv + yrs_exp + pct_start, data=salary.df)
-predict(object=best.lm, interval=&quot;prediction&quot;)</code></pre>
-<pre><code>## Warning in predict.lm(object = best.lm, interval = &quot;prediction&quot;): predictions on current data refer to _future_ responses</code></pre>
-<pre><code>##         fit      lwr      upr
-## 1  13.27865 12.32464 14.23265
-## 2  12.47855 11.57955 13.37756
-## 3  12.69974 11.73802 13.66147
-## 4  11.86182 10.93510 12.78854
-## 5  12.96078 12.00817 13.91339
-## 6  12.93644 12.00785 13.86503
-## 7  13.10640 12.20241 14.01038
-## 8  13.34713 12.39422 14.30004
-## 9  12.58550 11.66839 13.50262
-## 10 12.93815 12.00298 13.87332
-## 11 12.72009 11.79781 13.64237
-## 12 12.37719 11.45859 13.29580
-## 13 12.70145 11.78593 13.61696
-## 14 13.59621 12.66184 14.53059
-## 15 13.29781 12.38220 14.21342
-## 16 12.26025 11.34856 13.17194
-## 17 12.98809 12.04656 13.92963
-## 18 12.52668 11.61495 13.43842
-## 19 12.09397 11.17631 13.01163
-## 20 12.52980 11.60139 13.45820
-## 21 12.28956 11.37346 13.20566
-## 22 13.51457 12.57550 14.45363
-## 23 12.09397 11.17631 13.01163
-## 24 14.14970 13.16541 15.13399
-## 25 11.92152 10.99894 12.84409
-## 26 12.15208 11.24013 13.06403
-## 27 13.00726 12.11297 13.90155
-## 28 12.12690 11.19688 13.05692
-## 29 13.98642 13.03227 14.94056
-## 30 13.20293 12.15369 14.25216</code></pre>
-<pre class="r"><code>predict(object=best.lm,data.frame(draft_inv=1, yrs_exp=5, pct_start=2/7), interval=&quot;prediction&quot;) # see predict.lm() for documentation</code></pre>
+
+predict.lm(object=best.lm,data.frame(draft_inv=1, yrs_exp=5, pct_start=2/7), interval=&quot;prediction&quot;) # see predict.lm() for documentation</code></pre>
 <pre><code>##        fit      lwr     upr
 ## 1 13.21746 12.26261 14.1723</code></pre>
 <p><span class="math inline">\(\widehat{log\_salary} = 13.21 \ \ \ \Longrightarrow \ \ \ e^{13.21}=\$545,795\)</span></p>
+<p>“Based on the model, his estimated contract is $545,795 with a 95% low CI = <span class="math inline">\(e^{12.26}=\$211,081\)</span>. $315,000 is above the low CI, so this person does not have a good case that the offer was too low.”</p>
 
 
 </div>
