@@ -104,6 +104,7 @@ E(\overline{X}) &amp;= E\bigg(\frac{\sum X_i}{n} \bigg) \\
 \end{aligned}
 \]</span> Thus, <span class="math inline">\(\overline{X}\)</span> is an unbiased estimator for <span class="math inline">\(\theta\)</span>.</p></li>
 <li><p>Let <span class="math inline">\(X_1, X_2, X_3\)</span> be a random sample of size <span class="math inline">\(n=3\)</span> from the given exponential distribution with <span class="math inline">\(\theta = 1\)</span>. Find <span class="math inline">\(P(\text{min}(X_i) &gt; 1)\)</span>. (Round your answers to two decimal places.)<br />
+<br />
 <strong>Solution</strong><br />
 <span class="math display">\[
 \begin{aligned}
@@ -111,27 +112,33 @@ P\big(\text{min}(X_i) &gt; 1\big) &amp;= P(X_1 &gt; 1, X_2 &gt; 1, X_3 &gt; 1) \
                    &amp;= [P(X_i &gt; 1)]^3 \\
                    &amp;= \left[\int_1^{\infty} e^{-x}dx \right]^3 \\
                    &amp;= \Big[-e^{-x} \big|^{\infty}_1 \Big]^3 \\
-                   &amp;= [0 - -e^{-1}]^3 \\
+                   &amp;= \big[0 - \big(-e^{-1}\big) \big]^3 \\
                    &amp;= e^{-3} \\
                    &amp;\approx 0.05
 \end{aligned}
 \]</span></p></li>
 <li><p>Let <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> be independent random variables from the exponential distribution with <span class="math inline">\(\theta =1\)</span>. Let <span class="math inline">\(Y_1=X_1 - X_2\)</span> and <span class="math inline">\(Y_2 = X_1 + X_2\)</span>. Use transformation of variables to find the joint pdf of <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> and use it to determine the marginal pdf of <span class="math inline">\(Y_2\)</span>.<br />
+<br />
 <strong>Solution</strong><br />
-The joint pdf for <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> is <span class="math display">\[
+The joint pdf of <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> is given by <span class="math display">\[
+g(y_1, y_2) = |J| \cdot f[v_1(y_1, y_2), v_2(y_1, y_2)], \ \ \ (y_1, y_2) \in S_Y
+\]</span> The joint pdf for <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> is <span class="math display">\[
 \begin{aligned}
 f(x_1, x_2) &amp;= f(x_1)f(x_2) \\
         &amp;= e^{-x_1} e^{-x_2} \\
         &amp;= e^{-(x_1 + x_2)}, \ \ \ 0 &lt; x_1 &lt; \infty; \ 0 &lt; x_2 &lt; \infty
 \end{aligned}
-\]</span> <span class="math inline">\(Y_1=X_1 - X_2, \ Y_2=X_1 + X_2\)</span><br />
-Thus, <span class="math inline">\(x_1 = \frac{y_1 + y_2}{2}, \ x_2=\frac{y_2 - y_1}{2}\)</span><br />
-<span class="math display">\[
+\]</span> If <span class="math inline">\(Y_1=X_1 - X_2\)</span> and <span class="math inline">\(Y_2=X_1 + X_2\)</span>, then solving for <span class="math inline">\(x_1, x_2\)</span> we have <span class="math display">\[
+\begin{align*}
+x_1 &amp;= v_1(y_1, y_2) = \frac{y_1 + y_2}{2} \\
+x_2 &amp;= v_2(y_1, y_2) = \frac{y_2 - y_1}{2}
+\end{align*}
+\]</span> and the Jacobian is <span class="math display">\[
 \begin{aligned}
 J &amp;= \begin{vmatrix} 
  \frac{\partial x_1}{\partial y_1} &amp; \frac{\partial x_1}{\partial y_2} \\
  \frac{\partial x_2}{\partial y_1} &amp; \frac{\partial x_2}{\partial y_2}
- \end{vmatrix}
+ \end{vmatrix} \\
   &amp;= \begin{vmatrix}
  \frac{1}{2}  &amp; \frac{1}{2} \\
  -\frac{1}{2} &amp; \frac{1}{2}
@@ -140,12 +147,14 @@ J &amp;= \begin{vmatrix}
 \end{aligned}
 \]</span> The joint pdf of <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> is <span class="math display">\[
 \begin{aligned}
-g(y_1, Y_2) &amp;= \frac{1}{2}e^{-y_2}dy_1 \\
-        &amp;= y_2 e^{-y_2}, \ \ \ 0 &lt; y_2 &lt; \infty
+g(y_1, y_2) &amp;= |J| \cdot f[v_1(y_1, y_2), v_2(y_1, y_2)] \\
+        &amp;= \frac{1}{2} \exp \left\{- \left( \frac{y_1 + y_2}{2} + \frac{y_2 - y_1}{2} \right) \right\} \\
+        &amp;= \frac{1}{2} e^{-y_2}, \ \ \ -y_2 &lt; y_1 &lt; y_2 \ \text{and} \ 0 &lt; y_2 &lt; \infty
 \end{aligned}
 \]</span> Marginal pdf for <span class="math inline">\(Y_2\)</span> is <span class="math display">\[
 \begin{aligned}
-g_2(y_2) &amp;= \int_{-y_2}^{y_1} \frac{1}{2} e^{-y_2} dy_1 \\
+g_2(y_2) &amp;= \int_{-y_2}^{y_2} \frac{1}{2} e^{-y_2} dy_1 \\
+     &amp;= \frac{1}{2}y_2e^{-y_2} - \left(- \frac{1}{2}y_2e^{-y_2} \right) \\
      &amp;= y_2e^{-y_2}, \ \ \ 0 &lt; y_2 &lt; \infty
 \end{aligned}
 \]</span></p></li>
