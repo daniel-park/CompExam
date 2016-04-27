@@ -165,29 +165,19 @@ Y_{ijkl} = \mu + \delta_k + \alpha_i + \beta_j + \pi_{l(k)} + \epsilon_{ijkl}
 food.effect3$period &lt;- factor(food.effect3$period)
 food.effect3$subj &lt;- factor(food.effect3$subj)
 
-
-
-food.model &lt;- lm(AUC.Amt ~ seq + subj + AUC.Trt + period, data=food.effect3)
-anova(food.model)</code></pre>
-<pre><code>## Analysis of Variance Table
+food.aov &lt;- aov(AUC.Amt ~ seq  + AUC.Trt + period + Error(subj), data=food.effect3) 
+summary(food.aov)</code></pre>
+<pre><code>## 
+## Error: subj
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)
+## seq        1  90966   90966   1.917  0.215
+## Residuals  6 284668   47445               
 ## 
-## Response: AUC.Amt
-##           Df Sum Sq Mean Sq F value  Pr(&gt;F)  
-## seq        1  90966   90966 13.7077 0.01006 *
-## subj       6 284668   47445  7.1495 0.01524 *
-## AUC.Trt    1  84597   84597 12.7480 0.01178 *
-## period     1   1674    1674  0.2522 0.63342  
-## Residuals  6  39816    6636                  
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<pre class="r"><code>food.model &lt;- aov(AUC.Amt ~ seq + subj + AUC.Trt + period, data=food.effect3) 
-summary(food.model)</code></pre>
-<pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)  
-## seq          1  90966   90966  13.708 0.0101 *
-## subj         6 284668   47445   7.150 0.0152 *
-## AUC.Trt      1  84597   84597  12.748 0.0118 *
-## period       1   1674    1674   0.252 0.6334  
-## Residuals    6  39816    6636                 
+## Error: Within
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)  
+## AUC.Trt    1  84597   84597  12.748 0.0118 *
+## period     1   1674    1674   0.252 0.6334  
+## Residuals  6  39816    6636                 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <ol start="4" style="list-style-type: lower-alpha">
