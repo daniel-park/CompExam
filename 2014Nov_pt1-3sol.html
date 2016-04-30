@@ -84,21 +84,22 @@ f(x) =
 <li><p>If <span class="math inline">\(X\)</span> has the Rayleigh density, find the probability density function for <span class="math inline">\(U=X^2\)</span>.<br />
 <br />
 <strong>Solution</strong><br />
-<span class="math inline">\(X = \sqrt{U}\)</span>, where <span class="math inline">\(x &gt; 0\)</span> and <span class="math inline">\(u &gt; 0\)</span>.<br />
-Using transformation of variables, <span class="math display">\[
-f_U (u) = f_X(x) \cdot \left|\frac{dx}{du} \right|
-\]</span> and <span class="math inline">\(\frac{dx}{du} = \frac{1}{2 \sqrt{u}}\)</span>. Then <span class="math display">\[
+If <span class="math inline">\(U=X^2\)</span>, then <span class="math inline">\(X = \sqrt{U}\)</span>, where <span class="math inline">\(x &gt; 0\)</span> and <span class="math inline">\(u &gt; 0\)</span>. Let <span class="math inline">\(v(u) = \sqrt{u}\)</span>.<br />
+Then using change of variable technique, <span class="math display">\[
+f_U (u) = f_X(v(u)) \cdot \left|\frac{d}{du} v(u) \right|
+\]</span> and <span class="math inline">\(\frac{d}{du}v(u) = \frac{1}{2 \sqrt{u}}\)</span>. Then <span class="math display">\[
 \begin{align*}
-f_U(u) &amp;= \frac{2 \sqrt{u}}{\theta} e^{-\sqrt{u}^2/\theta} \cdot \left|\frac{1}{2 \sqrt{u}}\right| \\
+f_U(u) &amp;= f_X(\sqrt{u}) \cdot \left| \frac{1}{2 \sqrt{u}} \right| \\
+   &amp;= \frac{2 \sqrt{u}}{\theta} e^{-\sqrt{u}^2/\theta} \cdot \left|\frac{1}{2 \sqrt{u}}\right| \\
    &amp;=\frac{1}{\theta} e^{-u/\theta}, \ \ \ u &gt;0, \ \theta &gt; 0
 \end{align*}
-\]</span></p></li>
+\]</span> So <span class="math inline">\(U \sim exp(\theta)\)</span>.</p></li>
 <li><p>Let <span class="math inline">\(U_1, U_2, \dots, U_n\)</span> denote a random sample of size <span class="math inline">\(n\)</span> obtained from the distribution in part (a). Find the maximum likelihood estimator of <span class="math inline">\(\theta\)</span>.<br />
 <br />
 <strong>Solution</strong><br />
 <span class="math display">\[
 \begin{align*}
-L(\theta) &amp;= f(u_1) \cdot f(u_2) \cdots f(u_n) \\
+L(\theta) &amp;= f(u_1) \times f(u_2) \times \cdots \times f(u_n) \\
       &amp;= \prod_{i=1}^n \frac{1}{\theta} e^{-u_i/\theta} \\
       &amp;= \frac{1}{\theta^n} \exp\left\{ \sum_{i=1}^n \frac{u_i}{\theta} \right\} \\
 \log L(\theta) &amp;= \log \left(\frac{1}{\theta^n} \exp\left\{ \sum_{i=1}^n \frac{u_i}{\theta} \right\} \right) \\
@@ -120,10 +121,18 @@ L(\theta) &amp;= f(u_1) \cdot f(u_2) \cdots f(u_n) \\
 <li><p>Find the mean and variance of the estimate for <span class="math inline">\(\hat{\theta}\)</span>, that is find <span class="math inline">\(E(\hat{\theta})\)</span> and <span class="math inline">\(\text{Var}(\hat{\theta})\)</span>.<br />
 <br />
 <strong>Solution</strong><br />
-If <span class="math inline">\(U \sim exp(\theta)\)</span>, then mean of <span class="math inline">\(U\)</span> is <span class="math inline">\(\theta\)</span>, and its variance is <span class="math inline">\(\theta^2\)</span>.<br />
-Mean: <span class="math display">\[
-E(\hat{\theta}) = E \left( \frac{\sum_{i=1}^n U_i}{n} \right) = \frac{1}{n} E(\sum_{i=1}^n U_i) = \frac{1}{n}n \theta
-\]</span> Variance: <span class="math display">\[
+We will use the fact that an exponential distribution with parameter <span class="math inline">\(\theta\)</span> has a mean is <span class="math inline">\(\theta\)</span> and variance <span class="math inline">\(\theta^2\)</span>: Mean: <span class="math display">\[
+\begin{align*}
+E(\hat{\theta}) &amp;= E \left( \frac{1}{n} \sum_{i=1}^n U_i \right) \\
+            &amp;= \frac{1}{n} E \left( \sum_{i=1}^n U_i \right) \\
+            &amp;= \frac{1}{n} \sum_{i=1}^n E(U_i)  \\
+            &amp;= \frac{1}{n} \sum_{i=1}^n \theta  \\
+            &amp;= \frac{1}{n}n \theta \\
+            &amp;= \theta
+\end{align*}                
+\]</span> (So <span class="math inline">\(\hat{\theta}\)</span> is an unbiased estimator.)<br />
+<br />
+Variance: <span class="math display">\[
 \begin{align*}
 \text{Var}(\hat{\theta}) &amp;= \text{Var}\left( \frac{1}{n} \sum_{i=1}^n U_i \right) \\
   &amp;= \frac{1}{n^2} \text{Var}\left(  \sum_{i=1}^n U_i \right) \\
@@ -144,15 +153,22 @@ We determined that the MLE of <span class="math inline">\(\theta\)</span> is <sp
          &amp;= 32.471
 \end{align*}
 \]</span> So <span class="math inline">\(\hat{\theta} = 32.471\)</span></p></li>
-<li><p>Show that the maximum likelihood estimator for <span class="math inline">\(\theta\)</span> obtained in part (b) is a consistent estimator of <span class="math inline">\(\theta\)</span>.<br />
+<li>Show that the maximum likelihood estimator for <span class="math inline">\(\theta\)</span> obtained in part (b) is a consistent estimator of <span class="math inline">\(\theta\)</span>.<br />
 <br />
 <strong>Solution</strong><br />
-From part (b) we have <span class="math inline">\(\hat{\theta} = \overline{U}\)</span>, the mle for <span class="math inline">\(\theta\)</span>.<br />
+Conditions for an unbiased estimator:
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\hat{\theta}\)</span> is an unbiased estimator:<br />
+From part (c), we had <span class="math inline">\(E(\hat{\theta}) = \theta\)</span>.<br />
 <br />
-We know if <span class="math inline">\(\hat{\theta}\)</span> is an unbiased estimator of the parameter <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\text{Var}(\hat{\theta}) \to 0\)</span> as <span class="math inline">\(n \to \infty\)</span>, the <span class="math inline">\(\hat{\theta}\)</span> is a consistent estimator for <span class="math inline">\(\theta\)</span>.<br />
-<br />
-From part (c) we have <span class="math inline">\(E(\hat{\theta}) = \theta\)</span>, thus <span class="math inline">\(\hat{\theta} = \overline{U}\)</span> is an unbiased estimator for <span class="math inline">\(\theta\)</span>.</p></li>
+</li>
+<li><span class="math inline">\(\text{Var}(\hat{\theta}) \to 0\)</span> as <span class="math inline">\(n \to \infty\)</span>:<br />
+From part (c) we had <span class="math inline">\(\text{Var}(\hat{\theta}) = \frac{\theta^2}{n}\)</span>.</li>
+</ol></li>
 </ol>
+<ul>
+<li>Therefore, our mle is a consistent estimator.</li>
+</ul>
 
 
 </div>
