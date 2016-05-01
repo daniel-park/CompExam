@@ -76,15 +76,21 @@ f(x) = e^{-x}
 \]</span> where <span class="math inline">\(x&gt;0\)</span> and <span class="math inline">\(0\)</span> elsewhere.</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>Give the joint pdf of <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>, <span class="math inline">\(f(x_1, x_2)\)</span>.<br />
-<strong>Solution</strong><br />
-<span class="math display">\[
-f(x_1, x_2) = e^{-(x_1 + x_2)}
-\]</span></p></li>
-<li><p>Find the covariance between <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>.<br />
+<br />
 <strong>Solution</strong><br />
 <span class="math display">\[
 \begin{align*}
-\text{Cov}(X_1, X_2) &amp;= E(E_1 X_2) - E(X_1) E(X_2)  \\
+f(x_1, x_2) &amp;= f(x_1) \cdot f(x_2) \\
+        &amp;= e^{-x_1} e^{-x_2} \\
+        &amp;= e^{-(x_1 + x_2)}, \ \ \ x_1, x_2 &gt; 0
+\end{align*}
+\]</span></p></li>
+<li><p>Find the covariance between <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>.<br />
+<br />
+<strong>Solution</strong><br />
+<span class="math display">\[
+\begin{align*}
+\text{Cov}(X_1, X_2) &amp;= E(X_1 X_2) - E(X_1) E(X_2)  \\
                  &amp;= E(X_1) E(X_2) - E(X_1) E(X_2) \tag*{(by independence)} \\
                  &amp;= 0
 \end{align*}
@@ -95,32 +101,81 @@ Y_1 &amp;= X_1 - X_2 \\
 Y_2 &amp;= X_1 + X_2
 \end{aligned}
 \]</span> Give the joint pdf of <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span>, <span class="math inline">\(f(y_1, y_2)\)</span>. (Hint: Pay attention to the boundaries of the joint pdf).<br />
-<strong>Solution</strong></p></li>
+<br />
+<strong>Solution</strong><br />
+Solving for <span class="math inline">\(X_1, X_2\)</span> in terms of <span class="math inline">\(Y_1, Y_2\)</span>, we have <span class="math display">\[
+\begin{align*}
+X_1 &amp;= \frac{1}{2}(Y_1 + Y_2) \\
+X_2 &amp;= \frac{1}{2}(Y_2 - Y_1)
+\end{align*}
+\]</span> Letting <span class="math inline">\(v_1(y_1, y_2) = x_1\)</span> and <span class="math inline">\(v_2(y_1, y_2) = x_2\)</span>, then the joint pdf of <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> is <span class="math display">\[
+g(y_1, y_2) = |J| \cdot f\big(v_1(y_1, y_2), v_2(y_1, y_2) \big)
+\]</span> where <span class="math inline">\(J\)</span> is the Jacobian matrix. <span class="math display">\[
+\begin{align*}
+J &amp;= \begin{vmatrix}
+ \frac{\partial}{\partial y_1} v_1 (y_1, y_2) &amp; \frac{\partial}{\partial y_2} v_1 (y_1, y_2) \\[5 pt]
+ \frac{\partial}{\partial y_1} v_2 (y_1, y_2) &amp; \frac{\partial}{\partial y_2} v_2 (y_1, y_2)
+ \end{vmatrix} \\
+  &amp;\\
+  &amp;= \begin{vmatrix}
+ \frac{\partial}{\partial y_1} \frac{1}{2}(Y_1 + Y_2) &amp; \frac{\partial}{\partial y_2} \frac{1}{2}(Y_1 + Y_2) \\[5 pt]
+ \frac{\partial}{\partial y_1} \frac{1}{2}(Y_2 - Y_1) &amp; \frac{\partial}{\partial y_2} \frac{1}{2}(Y_2 - Y_1)
+ \end{vmatrix} \\
+  &amp;\\
+  &amp;= \begin{vmatrix} \\
+ \frac{1}{2} &amp; \frac{1}{2} \\[5 pt]
+ -\frac{1}{2} &amp; \frac{1}{2}
+ \end{vmatrix} \\
+  &amp;= \frac{1}{2}
+\end{align*}
+\]</span> Then <span class="math display">\[
+\begin{align*}
+g(y_1, y_2) &amp;= |J| \cdot f \big(v_1(y_1, y_2), v_2(y_1, y_2) \big) \\
+        &amp;= \frac{1}{2} f \left(\frac{1}{2}(y_1 + y_2), \frac{1}{2}(y_2 - y_1) \right) \\
+        &amp;= \frac{1}{2} \exp \left\{- \left(\frac{1}{2}(y_1 + y_2) + \frac{1}{2}(y_2 - y_1) \right) \right\} \\
+        &amp;= \frac{1}{2} e^{-y_2}, \ \ \ -y_2 &lt; y_1 &lt; y_2, \ 0 &lt; y_2 &lt; \infty
+\end{align*}
+\]</span> The boundaries of the support: <span class="math display">\[
+\begin{gather}
+\text{If} \ x_2=0 \ \Longrightarrow \ y_1=x_1 \ \text{and} \ y_2 = x_1 \ \Longrightarrow \ y_2 = y_1 \\
+\text{If} \ x_1=0 \ \Longrightarrow \ y_1= - x_2 \ \text{and} \ y_2 = x_2 \ \Longrightarrow \ y_2 = - y_1 \\
+\end{gather}
+\]</span></p></li>
 <li><p>Determine the marginal pdf of <span class="math inline">\(Y_2\)</span>, <span class="math inline">\(f(y_2)\)</span>. What is the name of this distribution?<br />
+<br />
 <strong>Solution</strong><br />
 <span class="math display">\[
 \begin{align*}
-f(y_2) &amp;= \int^{y_2}_{-y_2} \frac{1}{2} e^{-y_2} dy_1 \\  
-   &amp;= \frac{1}{2} e^{-y_2} \int^{y_2}_{-y_2} dy_1 \\
-   &amp;= \frac{1}{2} e^{-y_2} \bigg[ y_1 \bigg]^{y_2}_{-y_2} \\
-   &amp;= \frac{1}{2} e^{-y_2} [y_2 + y_2]  \\
+f(y_2) &amp;= \int^{y_2}_{-y_2} \frac{1}{2} e^{-y_2} \ dy_1 \\  
+   &amp;= \frac{1}{2} e^{-y_2} \int^{y_2}_{-y_2} 1 \ dy_1 \\
+   &amp;= \frac{1}{2} e^{-y_2} \Big[ y_1 \Big]^{y_1 = y_2}_{y_1 = -y_2} \\
+   &amp;= \frac{1}{2} e^{-y_2} (y_2 + y_2)  \\
+   &amp;= \frac{1}{2} e^{-y_2} 2y_2  \\
    &amp;= y_2 e^{-y_2}, \ \ \ y_2 &gt; 0 
 \end{align*}
-\]</span> <span class="math inline">\(Y_2 \sim Gamma(1,2)\)</span></p></li>
+\]</span> <span class="math inline">\(Y_2 \sim gamma(2,1)\)</span>: <span class="math display">\[
+\begin{align*}
+f(y_2; \alpha, \theta) &amp;= \frac{1}{\Gamma(\alpha) \theta^{\alpha}} y_2^{\alpha - 1} e^{-y_2/\theta} \\
+f(y_2; 2, 1) &amp;= \frac{1}{\Gamma(2) 1^{2}} y_2^{2 - 1} e^{-y_2/1} \\
+         &amp;= \frac{1}{(2-1)! 1^{2}} y_2^{2 - 1} e^{-y_2/1} \\
+         &amp;= y_2 e^{-y_2}
+\end{align*}
+\]</span></p></li>
 <li><p>Determine the marginal pdf of <span class="math inline">\(Y_1\)</span>, <span class="math inline">\(f(y_1)\)</span>. What is the name of this distribution?<br />
+<br />
 <strong>Solution</strong><br />
 For <span class="math inline">\(y_1 &gt; 0\)</span>,<br />
 <span class="math display">\[
 \begin{align*}
-f(y_1) &amp;= \int^{\infty}_{y_1} \frac{1}{2} e^{-y_2} dy_2 \\
-   &amp;= \frac{1}{2} \bigg[- e^{-y_2} \bigg]^{\infty}_{y_1} \\
-   &amp;= \frac{1}{2} [ + e^{-y_1}] \\
+f(y_1) &amp;= \int^{\infty}_{y_1} \frac{1}{2} e^{-y_2} \ dy_2 \\
+   &amp;= \frac{1}{2} \bigg[- e^{-y_2} \bigg]^{y_2=\infty}_{y_2=y_1} \\
+   &amp;= \frac{1}{2} \big[0 - (-e^{-y_1}) \big] \\
    &amp;= \frac{1}{2} e^{-y_1}, \ \ \ y_1 &gt; 0
 \end{align*}
 \]</span> For <span class="math inline">\(y_1 &lt; 0\)</span>, <span class="math display">\[
 \begin{align*}
 f(y_1) &amp;= \int^{\infty}_{-y_1} \frac{1}{2} e^{-y_2} dy_2      \\
-   &amp;= \frac{1}{2} \bigg[ -e^{-y_2} \bigg]^{\infty}_{-y_1} \\
+   &amp;= \frac{1}{2} \bigg[ -e^{-y_2} \bigg]^{y_2 = \infty}_{y_2 = -y_1} \\
    &amp;= \frac{1}{2}(0 + e^{+ y_1}) \\
    &amp;= \frac{1}{2}e^{y_1}, \ \ \ y_1 &lt; 0
 \end{align*}
@@ -128,33 +183,40 @@ f(y_1) &amp;= \int^{\infty}_{-y_1} \frac{1}{2} e^{-y_2} dy_2      \\
 f(y_1) = \frac{1}{2} e^{-|y_1|}, \ \ \ - \infty &lt; y_1 &lt; \infty
 \]</span></p></li>
 <li><p>Are <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> independent?<br />
+<br />
 <strong>Solution</strong><br />
-No.<br />
 <span class="math display">\[
-f(y_1,y_2) \neq f(y_1)f(y_2)
-\]</span></p></li>
+\begin{align*}
+f(y_1,y_2) &amp;\stackrel{?}{=} f(y_1) \cdot f(y_2) \\
+\frac{1}{2} e^{-y_2} &amp;\stackrel{?}{=} \frac{1}{2} e^{-|y_1|} \cdot y_2 e^{-y_2} \\
+\frac{1}{2} e^{-y_2} &amp;\neq \frac{1}{2} e^{-(|y_1| + y_2)}
+\end{align*}
+\]</span> <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> are not independent.</p></li>
 <li><p>Find the covariance between <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span>.<br />
+<br />
 <strong>Solution</strong><br />
 <span class="math inline">\(Y_1 = X_1 - X_2\)</span><br />
 <span class="math inline">\(Y_2 = X_1 + X_2\)</span><br />
-<span class="math display">\[
+We also note that because <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> come from the same distribution, <span class="math inline">\(E(X_1) = E(X_2)\)</span> and <span class="math inline">\(E(X^2_1) = E(X^2_2)\)</span>. <span class="math display">\[
 \begin{align*}
 \text{Cov}(Y_1, Y_2) &amp;= E(Y_1 Y_2) - E(Y_1) E(Y_2) \\
   &amp;= E[(X_1 - X_2)(X_1 + X_2)] - E[X_1 - X_2]E[X_1 + X_2] \\
-  &amp;= E[X_1^2 - X_2^2] - \underbrace{\big( E[X_1] - E[X_2] \big)}_{= 0} E[X_1 + X_2] \\
+  &amp;= E[X_1^2 - X_2^2] - \big( E[X_1] - E[X_2] \big) E[X_1 + X_2] \\
+  &amp;= E[X_1^2 - X_2^2] - 0 \cdot E[X_1 + X_2] \\
   &amp;= E[X_1^2] - E[X_2^2] \\
-  &amp;= 0 \tag*{(since $X_1, X_2 \stackrel{iid}{\sim} Exp(1)$)}
+  &amp;= 0 
 \end{align*}
 \]</span></p></li>
 <li><p>For sampling from what distribution does zero covariance imply independence?<br />
+<br />
 <strong>Solution</strong><br />
-Independence implies that covariance is zero, but zero covariance does not imply independence.<br />
+In general, independence implies that the covariance is zero. However, a zero covariance does not imply independence.<br />
 <br />
-Sampling from the bivariate normal <span class="math inline">\(BVN(\mu_1, \mu_2, \sigma_1^2, \sigma_2^2, \rho)\)</span>.<br />
+One exception is sampling from the bivariate normal distribution: <span class="math inline">\(BVN(\mu_X, \mu_Y, \sigma_X^2, \sigma_Y^2, \rho)\)</span>. For such a distribution, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent if and only if the correlation coefficient, <span class="math inline">\(\rho\)</span>, is zero.<br />
 <br />
-<span class="math display">\[
-\text{If} \ \sigma_{12}=0, \text{then} \ \rho = \frac{\sigma_{12}}{\sqrt{\sigma_1^2} \sqrt{\sigma_2^2}} = 0 \ \text{and} \ f(x_1, x_2) = f(x_1) f(x_2), \ \text{so independent.}
-\]</span></p></li>
+The correlation coefficient: <span class="math display">\[
+\rho = \frac{\text{Cov}(X, Y)}{\sigma_{X} \sigma_{Y}}
+\]</span> So if <span class="math inline">\(\text{Cov}(X, Y) = 0\)</span>, then <span class="math inline">\(\rho = 0\)</span>.</p></li>
 </ol>
 
 
