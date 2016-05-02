@@ -71,11 +71,12 @@ Solution
 <p style="text-align:center;">
 Friday, May 16, 2014
 </p>
-<p><strong>3.</strong> Let <span class="math inline">\(Y_1, Y_2, \dots, Y_{10}\)</span> be random sample of size <span class="math inline">\(10\)</span> from a distribtuion probability density (pdf) with: <span class="math display">\[
+<p><strong>3.</strong> Let <span class="math inline">\(Y_1, Y_2, \dots, Y_{10}\)</span> be random sample of size <span class="math inline">\(10\)</span> from a distribution probability density (pdf) with: <span class="math display">\[
 f(y \ | \ \theta) = \exp \{-(y- \theta)\} \ \ \ \text{for} \ \theta &lt; y &lt; \infty
 \]</span> Let <span class="math inline">\(Y_{(1)} \leq Y_{(2)} \leq \dots \dots \leq Y_{(10)}\)</span> be the order statistics of <span class="math inline">\(Y_1, Y_2, \dots, Y_{10}\)</span>.</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>[5 points] What is the cumulative distribution function of <span class="math inline">\(Y_1\)</span>?<br />
+<br />
 <strong>Solution</strong><br />
 <span class="math display">\[
 \begin{align*}
@@ -96,6 +97,7 @@ F(y) &amp;= \int^{y - \theta}_0 e^{-u} du \\
 \end{align*}
 \]</span></p></li>
 <li><p>[6 points] Show that the pdf of <span class="math inline">\(Y_{(2)}\)</span> is <span class="math inline">\(90(\exp \{-9(y - \theta) \} - \exp \{-10(y - \theta)\}), \ \ \ \text{for} \ y &gt; \theta\)</span>.<br />
+<br />
 <strong>Solution</strong><br />
 <span class="math display">\[
 f_k(x) = \frac{n!}{(k-1)! (n-k)!}f(x) F^{k-1}(x) [1 - F(x)]^{n-k}
@@ -108,6 +110,7 @@ f_{(2)}(y) &amp;= \frac{10!}{1! 8!} [F(y)]^1 [1 - F(y)]^8 f(y)  \\
 \end{align*}
 \]</span></p></li>
 <li><p>[8 points] Show, using integration, that <span class="math inline">\(E(Y_{(2)}) = \frac{19}{90} + \theta\)</span>.<br />
+<br />
 <strong>Solution</strong><br />
 <span class="math display">\[
 \begin{align*}
@@ -127,6 +130,7 @@ E(Y_{(2)}) &amp;= 90\left(\frac{19}{90^2} + \theta \frac{1}{90}\right) \\
 \end{align*}
 \]</span></p></li>
 <li><p>[6 points] Use part (c) to find a function <span class="math inline">\(g\)</span> such that <span class="math inline">\(g(Y_{(2)})\)</span> is an unbiased estimator of <span class="math inline">\(\theta\)</span>.<br />
+<br />
 <strong>Solution</strong><br />
 <span class="math display">\[
 E \left( Y_{(2)} - \frac{19}{90} \right) = \frac{19}{90} + \theta - \frac{19}{90} = \theta
