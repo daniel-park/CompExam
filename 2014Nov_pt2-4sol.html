@@ -74,6 +74,7 @@ Tuesday, November 18, 2014
 <p><strong>4.</strong> Let <span class="math inline">\(X_1, X_2, \dots, X_n\)</span> be i.i.d. Gaussian random variables with unknown mean <span class="math inline">\(\mu\)</span> and known variance <span class="math inline">\(\sigma^2\)</span>. We are interested in estimating <span class="math inline">\(\mu\)</span>.</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>Show that <span class="math inline">\(T = \sum_i X_i\)</span> is sufficient for <span class="math inline">\(\mu\)</span>.<br />
+<br />
 <strong>Solution</strong><br />
 Using the exponential criterion, if a pdf or pmf can be written in the form <span class="math display">\[
 f(x; \theta) = \exp \big[K(x)p(\theta) +S(x) + q(\theta) \big]
@@ -94,11 +95,58 @@ f(x; \mu, \sigma) &amp;= \frac{1}{\sqrt{2 \pi \sigma^2}} \exp \left\{- \frac{(x 
 \]</span></p></li>
 <li><p>Let <span class="math inline">\(Y=X_1\)</span> so that <span class="math inline">\(T=Y + \sum_{i=2}^n X_i\)</span>. Note that <span class="math inline">\(Y\)</span> is an unbiased estimator for <span class="math inline">\(\mu\)</span>. Find <span class="math display">\[
 f_{Y|T}(y \ | \ T=t)
-\]</span> and identify this conditional distribution by name.</p></li>
-<li><p>Let <span class="math inline">\(W = E(Y \ | \ T = t)\)</span> (remember that this is a random variable). Find the mean and variance of <span class="math inline">\(W\)</span>.</p></li>
-<li><p>Name the theorem that tells you <span class="math inline">\(W\)</span> is an unbiased estimator of <span class="math inline">\(\mu\)</span> and is at least as good of an estimator as <span class="math inline">\(Y\)</span>. Give the one case where <span class="math inline">\(W\)</span> is not better than <span class="math inline">\(Y\)</span>.</p></li>
-<li><p>Create a Monte Carlo simulation wherein you generate <span class="math inline">\(1000\)</span> samples of size <span class="math inline">\(n=34\)</span> from the normal distribution with <span class="math inline">\(\mu = 10\)</span> and <span class="math inline">\(\sigma = 4\)</span>. For each sample, calculate <span class="math inline">\(W\)</span> and <span class="math inline">\(Y\)</span> (you will have <span class="math inline">\(1000\)</span> of each). Report the simulated variance of <span class="math inline">\(W\)</span> and <span class="math inline">\(Y\)</span>. Does this agree with part (c)? Include your <code>R</code> code.</p></li>
+\]</span> and identify this conditional distribution by name.<br />
+<br />
+<strong>Solution</strong><br />
+Apply the identity <span class="math inline">\(P(A|B) = \frac{P(B|A) P(A)}{P(B)}\)</span><br />
+<span class="math display">\[
+\begin{align*}
+f_{Y|T}(y|T=t) &amp;= \frac{f_{T|Y}(t|U=u) f_Y(y)}{f_T(t)} \\
+  &amp;= \frac{(2 \pi (n-1)\sigma^2)^{-1/2} \exp \left\{- \frac{(t -(n-1)\mu - y)^2}{2(n-1) \sigma^2}\right\} (2 \pi \sigma^2)^{-1/2} \exp\left\{- \frac{(y - \mu)^2}{2 \sigma^2} \right\}}{(2\pi n \sigma^2)^{-1/2} \exp\left\{ - \frac{(t - n \mu)^2}{2n \sigma^2} \right\}}
+\end{align*}
+\]</span> <span class="math display">\[
+\begin{align*}
+           \\
+           = \sqrt{\frac{n}{n-1}} \frac{1}{\sqrt{2 \pi \sigma^2}} &amp;\exp \left\{ - \frac{1}{2 \sigma^2} \left( \frac{ (t - (n-1) \mu - y)^2}{n-1} + \frac{(y - \mu)^2}{1} - \frac{(t - n\mu)^2}{n} \right) \right\} \\
+           = \sqrt{\frac{n}{n-1}} \frac{1}{\sqrt{2 \pi \sigma^2}} &amp;\exp \Bigg\{ - \frac{1}{2 \sigma^2} \Bigg( \frac{t^2}{n-1} + (n-1)\mu^2 + \frac{y^2}{n-1} - 2t \mu - \frac{2ty}{n-1}  \\
+                                                                   &amp; \ \ \ \ \ \ \ \ \ \ \ + 2 \mu y - y^2 + \mu^2 - 2 \mu y - \frac{t^2}{n} - n \mu^2 + 2 t \mu \Bigg) \Bigg\} \\
+           = \sqrt{\frac{n}{n-1}} \frac{1}{\sqrt{2 \pi \sigma^2}} &amp;\exp \left\{ - \frac{1}{2 \sigma^2} \left( \frac{y^2}{n-1} + y^2 - \frac{2ty}{n-1} + \frac{t^2}{n-1} - \frac{t^2}{n} \right) \right\} \\
+           = \sqrt{\frac{n}{n-1}} \frac{1}{\sqrt{2 \pi \sigma^2}} &amp;\exp \left\{ - \frac{1}{2 \sigma^2} \left( \frac{n}{n-1}y^2 - \frac{2t}{n-1}y + \frac{t^2}{n-1} - \frac{t^2}{(n-1)n} \right)  \right\} \\
+           = \sqrt{\frac{n}{n-1}} \frac{1}{\sqrt{2 \pi \sigma^2}} &amp;\exp \left\{ - \frac{1}{2 \sigma \left( \frac{n-1}{n}\right)} \left( y - \frac{t}{n} \right)^2 \right\} \\
+\end{align*}
+\]</span> So <span class="math inline">\(Y|T \sim \mathcal{N} \left( \frac{t}{n}, \frac{n-1}{n} \sigma^2 \right)\)</span>.</p></li>
+<li><p>Let <span class="math inline">\(W = E(Y \ | \ T = t)\)</span> (remember that this is a random variable). Find the mean and variance of <span class="math inline">\(W\)</span>.<br />
+<br />
+<strong>Solution</strong><br />
+<span class="math display">\[
+\begin{align*}
+W &amp;= E(Y|T=t) \\
+  &amp;= \frac{T}{n} \\
+  &amp;= \frac{1}{n} \sum_{i=1}{n} X_i \\
+  &amp;= \overline{X}
+\end{align*}
+\]</span> We know that <span class="math inline">\(E(\overline{X}) = \mu\)</span> and <span class="math inline">\(\text{Var}(\overline{X}) = \frac{\sigma^2}{n}\)</span>.</p></li>
+<li><p>Name the theorem that tells you <span class="math inline">\(W\)</span> is an unbiased estimator of <span class="math inline">\(\mu\)</span> and is at least as good of an estimator as <span class="math inline">\(Y\)</span>. Give the one case where <span class="math inline">\(W\)</span> is not better than <span class="math inline">\(Y\)</span>.<br />
+<br />
+<strong>Solution</strong><br />
+“By the Rao-Blackwell theorem, <span class="math inline">\(W\)</span> is an unbiased estimator of <span class="math inline">\(\mu\)</span> and will have a variance that is at lest as small as <span class="math inline">\(Y\)</span>. The only case where the variance of <span class="math inline">\(W\)</span> will not be smaller than that of <span class="math inline">\(Y\)</span> is when <span class="math inline">\(n=1\)</span>, in which case <span class="math inline">\(W=Y\)</span> and their variances are the same.”</p></li>
+<li><p>Create a Monte Carlo simulation wherein you generate <span class="math inline">\(1000\)</span> samples of size <span class="math inline">\(n=34\)</span> from the normal distribution with <span class="math inline">\(\mu = 10\)</span> and <span class="math inline">\(\sigma = 4\)</span>. For each sample, calculate <span class="math inline">\(W\)</span> and <span class="math inline">\(Y\)</span> (you will have <span class="math inline">\(1000\)</span> of each). Report the simulated variance of <span class="math inline">\(W\)</span> and <span class="math inline">\(Y\)</span>. Does this agree with part (c)? Include your <code>R</code> code.<br />
+<br />
+<strong>Solution</strong><br />
+Answers will vary.</p></li>
 </ol>
+<pre class="r"><code>B &lt;- 1000
+w &lt;- numeric(B)
+y &lt;- numeric(B) 
+for (i in 1:B){
+  samp &lt;- rnorm(34,10,4)
+  w[i] &lt;- samp[1]
+  y[i] &lt;- mean(samp)
+}
+var(w) </code></pre>
+<pre><code>## [1] 14.69505</code></pre>
+<pre class="r"><code>var(y)</code></pre>
+<pre><code>## [1] 0.4964988</code></pre>
 
 
 </div>
