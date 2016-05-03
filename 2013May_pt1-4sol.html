@@ -76,17 +76,98 @@ Friday, May 17, 2013
 BVN (\mu_X = \mu_Y = 0, \ \sigma_X^2 = \sigma_Y^2 = 1, \ \rho = 0)
 \]</span> Give reasons for your answers.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>In this situation, what is the probability that a randoom rifle shot hits in the first quadrant (<span class="math inline">\(X, Y &gt; 0\)</span>)? What is the probability it hits above and to the right of (1,1)?</p></li>
+<li><p>In this situation, what is the probability that a random rifle shot hits in the first quadrant (<span class="math inline">\(X, Y &gt; 0\)</span>)? What is the probability it hits above and to the right of (1,1)?<br />
+<br />
+<strong>Solution</strong><br />
+Note that <span class="math inline">\(X \sim N(0,1)\)</span> and <span class="math inline">\(Y \sim N(0,1)\)</span> are independent.<br />
+The probability that a random shot is above the X-axis or to the right of the Y-axis is <span class="math display">\[
+\begin{align*}
+P(X &gt; 0) &amp;= 1 - \Phi(0) = \frac{1}{2} \\
+P(Y &gt; 0) &amp;= 1 - \Phi(0) = \frac{1}{2} \\
+\end{align*}
+\]</span> Since <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, then the probability of a random shot hitting the intersection of the two areas is <span class="math display">\[
+\begin{align*}
+P(X &gt; 0, Y &gt; 0) &amp;= P(X &gt; 0) \cdot P(Y &gt; 0) \\
+            &amp;= \frac{1}{2} \cdot \frac{1}{2} \\
+            &amp;= \frac{1}{4}
+\end{align*}
+\]</span> The probability it hits above and to the right of (1,1): <span class="math display">\[
+\begin{align*}
+P(X &gt; 1) &amp;= 1 - \Phi(1) = 0.1587 \\
+P(Y &gt; 1) &amp;= 1 - \Phi(1) = 0.1587 \\
+     &amp;\Downarrow \\
+P(X &gt; 1, Y &gt; 1) &amp;= P(X &gt; 1) \cdot P(Y &gt; 1) \\
+            &amp;= 0.1587 \cdot 0.1587 \\
+            &amp;= 0.0252
+\end{align*}
+\]</span></p></li>
 <li><p>Briefly explain why the distribution of the random variable <span class="math inline">\(Q = X^2 + Y^2\)</span> is chi-squared with 2 degrees of freedom. What is the <span class="math inline">\(E[Q]\)</span>? You may use well-known definitions and theorems. Give at least one alternative name for this distribution.<br />
-(Note: This distribution has moment generating function <span class="math inline">\(m(t) = 1/(1 - 2t)\)</span>, for <span class="math inline">\(\big| \ t \ \big| &lt; 0.5\)</span>, and density function <span class="math inline">\(f(x) = 0.5 e ^{-0.5x}\)</span>, for <span class="math inline">\(x&gt;0\)</span>.)</p></li>
-<li><p>What is the probability that a random shot hits within 2 units of the origin? Within what distance <span class="math inline">\(r\)</span> from the origin will a random shot fall with probability <span class="math inline">\(1/2\)</span>?</p></li>
+(Note: This distribution has moment generating function <span class="math inline">\(m(t) = 1/(1 - 2t)\)</span>, for <span class="math inline">\(\big| \ t \ \big| &lt; 0.5\)</span>, and density function <span class="math inline">\(f(x) = 0.5 e ^{-0.5x}\)</span>, for <span class="math inline">\(x&gt;0\)</span>.)<br />
+<br />
+<strong>Solution</strong><br />
+It is known that the square of a random variable of a standard normal distribution has a chi-square distribution with one degree of freedom. It is also known that the sum of independent chi square random variables follows a chi-square distribution whose degrees of freedom is the sum of their degrees of freedom. In this case, <span class="math inline">\(Q\)</span> follows a chi-square distribution with 2 degrees of freedom.<br />
+<br />
+The expected value of a random variable with a chi-square distribution is equal to its degrees of freedom. So <span class="math inline">\(E(Q) = 2\)</span>.<br />
+<br />
+Equivalent distributions are <span class="math inline">\(Exp(\lambda=0.5), Exp(\theta=2), Gamma(\alpha=1, \lambda=0.5), Gamma(\alpha=1, \theta=2)\)</span>.</p></li>
+<li><p>What is the probability that a random shot hits within 2 units of the origin? Within what distance <span class="math inline">\(r\)</span> from the origin will a random shot fall with probability <span class="math inline">\(1/2\)</span>?<br />
+<br />
+<strong>Solution</strong><br />
+Let <span class="math inline">\(R\)</span> represent the radius of a 2-unit circle.<br />
+<br />
+<span class="math inline">\(R^2 = X^2 + Y^2\)</span> or <span class="math inline">\(R = \sqrt{X^2 + Y^2}\)</span><br />
+Using the change of variable technique, <span class="math display">\[
+\begin{align*}
+P(R \leq 2) &amp;= P(R^2 \leq 4) \\
+        &amp;= P(X^2 + Y^2 \leq 4) \\
+        &amp;= P(Q \leq 4)
+\end{align*}
+\]</span> From the note in part (b), we are told that the pdf of <span class="math inline">\(Q\)</span> is <span class="math inline">\(f(x) = 0.5 e ^{-0.5x}\)</span>. Then <span class="math display">\[
+\begin{align*}
+P(Q \leq 4) &amp;= F_Q(4) \\
+        &amp;= \int_0^4 f_Q(x) dx \\
+        &amp;= \int_0^4 0.5 e ^{-0.5x} \ dx \\
+        &amp;= 1 - e ^{-0.5x} \Big|^4_0 \\
+        &amp;= 1 - e^{-2} - (1 - 1) \\
+        &amp;= 0.8647
+\end{align*}
+\]</span> The distance <span class="math inline">\(r\)</span> where the probability of 1/2 that a random shot hits within that range is <span class="math display">\[
+\begin{align*}
+\frac{1}{2} &amp;= P(R \leq r) \\
+        &amp;= P(R^2 \leq r^2) \\
+        &amp;= P(X^2 + Y^2 \leq r^2) \\
+        &amp;= P(Q \leq r^2) \\
+        &amp;= F_Q(r^2) \\
+\frac{1}{2} &amp;= 1 - e^{-0.5r^2} \\
+e^{-0.5r^2} &amp;= \frac{1}{2} \\
+-0.5r^2     &amp;= \log \frac{1}{2} \\
+r^2         &amp;= \frac{\log 1 - \log 2}{-0.5} \\
+r^2         &amp;= 2 \log 2 \\
+r           &amp;= 1.17741
+\end{align*}
+\]</span></p></li>
 <li><p>What is the probability that a random shot hits within the triangle with vertices <span class="math inline">\((0,0), (0, 1),\)</span> and <span class="math inline">\((1,0)\)</span>?<br />
-(Hint: Rotate 45 degrees. Use symmetry and the same idea as in part (a).)</p></li>
+(Hint: Rotate 45 degrees. Use symmetry and the same idea as in part (a).)<br />
+<br />
+<strong>Solution</strong><br />
+Since <span class="math inline">\(X, Y \stackrel{iid}{\sim} N(0,1)\)</span>, then <span class="math inline">\(X', Y' \stackrel{iid}{\sim} N(0,1)\)</span> (see diagram).<br />
+<span class="math display">\[
+\begin{align*}
+P\left( 0 \leq X \leq \frac{\sqrt{2}}{2}, 0 \leq Y \leq \frac{\sqrt{2}}{2} \right) 
+  &amp;= \left( \Phi \left(\frac{\sqrt{2}}{2} \right) - \Phi(0) \right)\left( \Phi \left(\frac{\sqrt{2}}{2} \right) - \Phi(0) \right) \\
+  &amp;= \left( \Phi \left(\frac{\sqrt{2}}{2} \right) - \Phi(0) \right)^2 \\
+  &amp;= (0.7602 - 0.5)^2 \\
+  &amp;= 0.0677
+\end{align*}
+\]</span></p></li>
 <li><p>Carefully explain each line of output from the following simulation in <code>R</code> relates to one or more of the parts above.</p></li>
 </ol>
 <pre><code>R code:
-m = 10000000
-x = rnorm(m)
+m = 10000000</code></pre>
+<ul>
+<li>“One million <span class="math inline">\(m\)</span> random points are simulated.”</li>
+</ul>
+<pre><code>x = rnorm(m)
 y = rnorm(m)
 pr = mean(sqrt(x^2 + y^2) &lt; 2)
 pr
@@ -97,13 +178,32 @@ mean(x &gt; 0 &amp; y &gt; 0 &amp; x+y &lt; 1)
 Output:
 &gt; pr = mean(sqrt(x^2 + y^2) &lt; 2)
 pr
-[1] 0.865153
-&gt; 1.96*sqrt(pr*(1-pr)/m)
-[1] 0.0006694578
-&gt; mean(x &gt; 1 &amp; y &gt; 1)
-[1] 0.025107
-&gt; mean(x &gt; 0 &amp; y &gt; 0 &amp; x+y &lt; 1)
+[1] 0.865153</code></pre>
+<ul>
+<li>“The proportion falling within 2 units of the origin is about .865, which agrees well with the answer to (c).”</li>
+</ul>
+<pre><code>&gt; 1.96*sqrt(pr*(1-pr)/m)
+[1] 0.0006694578</code></pre>
+<ul>
+<li>“Margins of simulation error are about: <span class="math display">\[
+\begin{align*}
+1.96[.865(1 - .865)/m]^{1/2} &amp;= 0.0007, \\
+1.96[.025(1 - .025)/m]^{1/2} &amp;= 0.0003, \\
+\text{and} \pm 1.96[.0677(1 - .0677)/m]^{1/2} &amp;= .0005,
+\end{align*}
+\]</span> respectively. So it is reasonable to hope for 2 or 3 place accuracy.”</li>
+</ul>
+<pre><code>&gt; mean(x &gt; 1 &amp; y &gt; 1)
+[1] 0.025107</code></pre>
+<ul>
+<li>“The proportion falling above and to the right of (1, 1) is about .025, which agrees well with the answer for the second probability in part (a).”</li>
+</ul>
+<pre><code>&gt; mean(x &gt; 0 &amp; y &gt; 0 &amp; x+y &lt; 1)
 [1] 0.067957</code></pre>
+<ul>
+<li>“The proportion within the designated triangle is about .068, which agrees well with the answer to (d).”</li>
+</ul>
+<p>“Finally, this simulation method can be used to find probabilities of areas that are not easily computed by other methods.”</p>
 
 
 </div>
