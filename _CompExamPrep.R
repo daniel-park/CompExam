@@ -5,11 +5,28 @@ setwd("~/Dropbox/CSUEB/CompExam/RProgram")
 
 
 
-part1 <- c("2010Nov_pt1-1", "2010Nov_pt1-2", 
-           "2010Nov_pt1-3", "2010Nov_pt1-4",
+part1 <- c("2010May_pt1-3", 
+           "2010Nov_pt1-3", 
+           "2011May_pt1-1", "2011May_pt1-3", 
+           "2011Nov_pt1-2", "2011Nov_pt1-3",
+           "2012May_pt1-1", "2012May_pt1-2",
+           "2012May_pt1-3", "2012May_pt1-4",
+           "2012Nov_pt1-1", "2012Nov_pt1-2",
+           "2012Nov_pt1-3", "2012Nov_pt1-4",
+           "2013May_pt1-1", "2013May_pt1-2",
+           "2013May_pt1-3", "2013May_pt1-4",
+           "2013Nov_pt1-1", "2013Nov_pt1-2",
+           "2013Nov_pt1-3", "2013Nov_pt1-4",  
+           "2014May_pt1-1", "2014May_pt1-2",
+           "2014May_pt1-3", "2014May_pt1-4",  
+           "2014Nov_pt1-1", "2014Nov_pt1-2",
+           "2014Nov_pt1-3", "2014Nov_pt1-4",
            "2015May_pt1-1", "2015May_pt1-2",
            "2015May_pt1-3", "2015May_pt1-4", 
-           "2015May_pt1-5")
+           "2015May_pt1-5",
+           "2014Nov_pt1-1", "2014Nov_pt1-2",
+           "2014Nov_pt1-3", "2014Nov_pt1-4",
+           "2014Nov_pt1-5")
 part2 <- c("2010Nov_pt2-1", "2010Nov_pt2-2", 
            "2010Nov_pt2-3", "2010Nov_pt2-4")
 
