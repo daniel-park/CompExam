@@ -81,7 +81,7 @@ f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}}\exp \bigg\{- \frac{1}{2} \bigg(\frac{x - 
                         &amp;= 232
 \end{align*}
 \]</span> <span class="math">\(232\)</span> hours is the <span class="math">\(90^{th}\)</span> percentile of lifetimes.<br /><br /></li>
-<li>Let <span class="math">\(X=\)</span> life in hours of an electronic component. Assume that <span class="math">\(X\)</span> is normally distributed with a mean of <span class="math">\(200\)</span> hours and a standard deviation of <span class="math">\(25\)</span> hours. Mt. Smith buys <span class="math">\(5\)</span> of these components (picked at random). What is the probability that at least <span class="math">\(4\)</span> of the componenets will last over <span class="math">\(211\)</span> hours? Use <span class="math">\(4\)</span> decimal places for your answer.<br /><br /><strong>Solution</strong><br /><span class="math">\(X \sim N(200, 25)\)</span>. If <span class="math">\(X=211\)</span>, <span class="math">\[
+<li>Let <span class="math">\(X=\)</span> life in hours of an electronic component. Assume that <span class="math">\(X\)</span> is normally distributed with a mean of <span class="math">\(200\)</span> hours and a standard deviation of <span class="math">\(25\)</span> hours. Mt. Smith buys <span class="math">\(5\)</span> of these components (picked at random). What is the probability that at least <span class="math">\(4\)</span> of the components will last over <span class="math">\(211\)</span> hours? Use <span class="math">\(4\)</span> decimal places for your answer.<br /><br /><strong>Solution</strong><br /><span class="math">\(X \sim N(200, 25)\)</span>. If <span class="math">\(X=211\)</span>, <span class="math">\[
 z = \frac{x - \mu}{\sigma} = \frac{211 - 200}{25} = 0.44
 \]</span> Then the probability that a single component will last over 211 hours is<br /><span class="math">\[
 P(Z &gt; 0.44) = 1- \Phi(0.44) = 0.33
@@ -94,12 +94,14 @@ P(Y \geq 4) &amp;= P(Y=4) + P(Y=5) \\
 \]</span><br /></li>
 <li>Let <span class="math">\(X=\)</span> life in hours of an electronic component. Assume that <span class="math">\(X\)</span> is normally distributed with a mean of <span class="math">\(200\)</span> hours and a standard deviation of <span class="math">\(\sigma\)</span>. A purchaser of a large number of these components requires that at least <span class="math">\(97.5\%\)</span> of them last over <span class="math">\(150\)</span> hours. What is the largest value that <span class="math">\(\sigma\)</span> can be and still meet the requirement of the purchaser?<br /><br /><strong>Solution</strong><br />The <span class="math">\(2.5^{th}\)</span> percentile of the standard normal distribution is <span class="math">\(-1.96\)</span>. So the quantile for <span class="math">\(X\)</span> is <span class="math">\[
 \mu - 1.96 \cdot \sigma = 200 - 1.96 \cdot \sigma
-\]</span> Equate that quantile to the bare minimum requirement, <span class="math">\(120\)</span> hours, and solve for <span class="math">\(\sigma\)</span>: <span class="math">\[
+\]</span> Equate that quantile to the bare minimum requirement, <span class="math">\(150\)</span> hours, and solve for <span class="math">\(\sigma\)</span>: <span class="math">\[
 \begin{align*}
-120 &amp;= \mu - 1.96 \cdot \sigma \\
-&amp;= 200 - 1.96 \cdot \sigma \\
+150    &amp;= \mu - 1.96 \cdot \sigma \\
+   &amp;= 200 - 1.96 \cdot \sigma \\
+\sigma &amp;= \frac{200-150}{1.96} \\
+   &amp;= 25.5102
 \end{align*}
-\]</span> <span class="math">\(\sigma=40.82\)</span><br /><br /></li>
+\]</span><br /></li>
 <li>Let <span class="math">\(X\)</span> have a normal distribution with mean <span class="math">\(\mu\)</span> and standard deviation <span class="math">\(\sigma\)</span>. Let <span class="math">\(Z = \frac{X - \mu}{\sigma}\)</span>. Prove that <span class="math">\(Z\)</span> has a standard normal distribution.<br /><br /><strong>Solution</strong><br /><span class="math">\[
 \begin{align*}
 F_Z(z) &amp;= P(Z \leq z)  \\
