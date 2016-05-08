@@ -72,7 +72,7 @@ Solution
 Friday, November 13, 2015
 </p>
 <p><strong>2.</strong> Let <span class="math">\(X_1, X_2, \dots, X_n\)</span> represent <span class="math">\(n\)</span> i.i.d. observations from an exponential distribution having probability density function (pdf) <span class="math">\[
-f(x, \theta) = \frac{1}{\theta} d^{-x/\theta}; \ \ \ x &gt;0, \ \theta&gt;0
+f(x, \theta) = \frac{1}{\theta} e^{-x/\theta}; \ \ \ x &gt;0, \ \theta&gt;0
 \]</span> Consider the simple hypotheses <span class="math">\(H_0: \theta = \theta_0\)</span> versus <span class="math">\(H_1:\theta = \theta_1\)</span>, where <span class="math">\(\theta_1 &lt; \theta_0\)</span>.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Find the likelihood function under both hypotheses.<br /><strong>Solution</strong><br />This is a simple hypothesis which doesn’t require determining an mle for the parameter in question.<br />Under <span class="math">\(H_0\)</span>, <span class="math">\[
@@ -99,12 +99,14 @@ f(z, v) = \frac{z^{v/2 - 1}e^{-z/2}}{\Gamma(v/2)2^{v/2}}; \ \ \ z&gt;0.
 \begin{align*}
 P(Y \leq y) &amp;= P \left(\frac{2}{\theta_0} X \leq y \right) \\
         &amp;= P \left(X \leq \frac{\theta_0}{2}y \right) \\
-        &amp;= 1 - \exp \left\{1 \frac{1}{\theta_0}\frac{\theta_0}{2}y \right\} \\
+        &amp;= F_X \left(\frac{\theta_0}{2}y \right) \\
+        &amp;= 1 - \exp \left\{- \frac{1}{\theta_0}\frac{\theta_0}{2}y \right\} \\
         &amp;= 1 - e^{-y/2}
 \end{align*}
 \]</span> Taking the derivative with respect to <span class="math">\(y\)</span> yields <span class="math">\[
 \begin{align*}
-f_Y(y) &amp;= \frac{d}{dy} (1 - e^{-y/2} ) \\
+f_Y(y) &amp;= \frac{d}{dy} F_Y(y) \\ 
+   &amp;= \frac{d}{dy} (1 - e^{-y/2} ) \\
    &amp;= \frac{1}{2} e^{-y/2}, \ \ \ y &gt; 0
 \end{align*}
 \]</span> We can rewrite the above and compare it to the pdf for the chi-square distribution:<br /><span class="math">\[
@@ -127,7 +129,7 @@ f(z,v) &amp;= \frac{z^{v/2 - 1}e^{-z/2}}{\Gamma(v/2)2^{v/2}}, \ \ \ z &gt; 0
 \]</span></p></li>
 <li><p>For <span class="math">\(\theta_0=2, \theta_1 = 1, \alpha = 0.05\)</span>, and <span class="math">\(n=5\)</span>, find <span class="math">\(k\)</span> as defined in the hint in part (d) [the rejection region in terms of the likelihood ratio test statistic].<br /><strong>Solution</strong><br />The sum of <span class="math">\(n\)</span> independent chi-square random variables follows a chi-square distribution whose degrees of freedom is the sum of the degrees of freedom for the <span class="math">\(n\)</span> variables. So <span class="math">\[
 Y= \sum_{i=1}^5 X_i \ \text{where} \ X_i \sim \chi^2_{2} \ \ \ \Longrightarrow \ \ \ Y \sim \chi^2_{(10)}
-\]</span> We are rejecting <span class="math">\(H_0\)</span> for small values of <span class="math">\(Y\)</span>. Using a chi-square table, the rejection region for <span class="math">\(\chi^2_{(0.05,\ 10)}\)</span> is the region below 3.94.<br /><span class="math">\[
+\]</span> We are rejecting <span class="math">\(H_0\)</span> for small values of <span class="math">\(Y\)</span>. Using a chi-square table, the rejection region for <span class="math">\(\chi^2_{(0.05,\ 10)}\)</span> is the region below 3.94. So <span class="math">\(0.05 = P(Y \leq 3.94)\)</span>.<br /><span class="math">\[
 \begin{align*}
 3.94 &amp;= \frac{2}{\theta_0} \cdot \left(\frac{\ln k + n \ln \theta_0 - n \ln \theta_1}{\frac{1}{\theta_1} - \frac{1}{\theta_0}} \right) \\
  &amp;= \frac{2}{2} \left(\frac{\ln k + 5 \ln 2 - 5 \ln 1}{\frac{1}{1} - \frac{1}{2}} \right) \\
