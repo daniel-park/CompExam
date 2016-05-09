@@ -87,15 +87,15 @@ f_X(x) &amp;= \int^{1-x}_0 24xy \ dy \\
 f_Y(y) &amp;= \int^{1-y}_0 24xy \ dx \\
    &amp;= 12y(1-y)^2, \ \ \ 0 &lt;y &lt; 1
 \end{align*}
-\]</span></p></li>
-<li><p>Are <span class="math">\(X\)</span> and <span class="math">\(Y\)</span> independent? Justify your answer using the definition of independence.<br /><strong>Solution</strong><br /><span class="math">\[
+\]</span><br /><br /></p></li>
+<li><p>Are <span class="math">\(X\)</span> and <span class="math">\(Y\)</span> independent? Justify your answer using the definition of independence.<br /><br /><strong>Solution</strong><br /><span class="math">\[
 \begin{align*}
 f_X(x) f_Y(y) &amp;= 12x (1-x)^2 \cdot 12y(1-y)^2 \\
           &amp;= 144xy(1-x)^2(1-y)^2 \\
           &amp;\neq 24xy = f(x,y)
 \end{align*}
-\]</span> <span class="math">\(X\)</span> and <span class="math">\(Y\)</span> are not independent.</p></li>
-<li><p>Let <span class="math">\(U = X + Y\)</span> and <span class="math">\(V = X\)</span>. Find the join pdf for <span class="math">\(U\)</span> and <span class="math">\(V\)</span>.<br /><strong>Solution</strong><br /><span class="math">\(X=h_1(u, v)=V\)</span><br /><span class="math">\(Y = h_2(u, v) = U - V\)</span><br />Since <span class="math">\(v &gt; 0\)</span> and <span class="math">\(u - v &gt; 0\)</span>, we have that <span class="math">\(u &gt; v\)</span> (or <span class="math">\(0 &lt; v &lt; u &lt; \infty\)</span>). <span class="math">\[
+\]</span> <span class="math">\(X\)</span> and <span class="math">\(Y\)</span> are not independent.<br /><br /><br /></p></li>
+<li><p>Let <span class="math">\(U = X + Y\)</span> and <span class="math">\(V = X\)</span>. Find the joint pdf for <span class="math">\(U\)</span> and <span class="math">\(V\)</span>.<br /><br /><strong>Solution</strong><br /><span class="math">\(X=h_1(u, v)=V\)</span><br /><span class="math">\(Y = h_2(u, v) = U - V\)</span><br />Since <span class="math">\(v &gt; 0\)</span> and <span class="math">\(u - v &gt; 0\)</span>, we have that <span class="math">\(u &gt; v\)</span> (or <span class="math">\(0 &lt; v &lt; u &lt; \infty\)</span>). <span class="math">\[
 f_{UV}(u, v) = f_{XY}(h_1(u, v), h_2(u, v)) \cdot \big|J(u, v) \big|  
 \]</span> where <span class="math">\[
 \begin{align*}
@@ -112,14 +112,23 @@ J(u,v) &amp;= \text{det} \begin{vmatrix}
 f_{UV}(u,v) &amp;= 24v(u-v) \cdot \big| -1 \big| \\
         &amp;= 24v(u-v), \ \ \ 0 &lt; v &lt; u &lt; 1
 \end{align*}
-\]</span></p></li>
-<li><p>Find the correlation coefficient beteween <span class="math">\(U\)</span> and <span class="math">\(V\)</span>.<br /><strong>Solution</strong><br />We know <span class="math">\[
+\]</span><br /><br /></p></li>
+<li><p>Find the correlation coefficient between <span class="math">\(U\)</span> and <span class="math">\(V\)</span>.<br /><br /><strong>Solution</strong><br />The correlation coefficient is defined as <span class="math">\[
+\rho = \frac{\text{Cov}(U,V)}{\sqrt{\text{Var}(U) \cdot \text{Var}(V)}}
+\]</span> What we know and what we need: <span class="math">\[
 \begin{align*}
+\text{Cov}(U, V) &amp;= E(UV) - E(U) \cdot E(V) \\
+E(UV) &amp;= ? \\
 E(V) &amp;= E(X) \\
+E(X) &amp;= ? \\
 E(U) &amp;= E(X) + E(Y) \\
+E(Y) &amp;= ? \\
 \text{Var}(V) &amp;= \text{Var}(X) \\
-\text{Var}(U) &amp;= \text{Var}(X) + \text{Var}(Y) + 2 \text{Cov}(X, Y) \\
-E(UV) &amp;= ?
+\text{Var}(X) &amp;= ? \\
+\text{Var}(U) &amp;= \text{Var}(X + Y) = \text{Var}(X) + \text{Var}(Y) + 2 \text{Cov}(X, Y) \\
+\text{Var}(Y) &amp;= ?\\
+\text{Cov}(X, Y) &amp;= E(XY) - E(X) \cdot E(Y) \\
+E(XY) &amp;= ?
 \end{align*}
 \]</span> <span class="math">\[
 \begin{align*}
