@@ -83,8 +83,8 @@ f(x, y) = x + y, \ \ \ 0 &lt; x &lt; 1 \ \text{and} \ 0 &lt; y &lt; 1
   &amp;= \frac{y}{8} + \frac{y^2}{4} \bigg|^{1/3}_{0} \\
   &amp;= \frac{5}{72}
 \end{align*}
-\]</span></p></li>
-<li><p>[4 points] Find the marginal probability density functions for <span class="math">\(X\)</span> and for <span class="math">\(Y\)</span>.<br /><strong>Solution</strong><br />Marginal pdf for <span class="math">\(X\)</span>: <span class="math">\[
+\]</span><br /><br /></p></li>
+<li><p>[4 points] Find the marginal probability density functions for <span class="math">\(X\)</span> and for <span class="math">\(Y\)</span>.<br /><br /><strong>Solution</strong><br />Marginal pdf for <span class="math">\(X\)</span>: <span class="math">\[
 \begin{align*}  
 f_X(y) &amp;= \int^1_0 x + y \ dy \\
    &amp;= xy + \frac{1}{2} y^2 \bigg|^{y=1}_{y=0} \\
@@ -113,23 +113,23 @@ f_Y(y) &amp;= \begin{array}[lcl] \\
       \end{cases}
       \end{array}          
 \end{align*}
-\]</span></p></li>
-<li><p>[4 points] State the defintion for independence of two continuous random variables and using this definition, determine whether or not <span class="math">\(X\)</span> and <span class="math">\(Y\)</span> are independent.<br /><strong>Solution</strong><br /><br />Definition: Two continuous random variables, <span class="math">\(X\)</span> and <span class="math">\(Y\)</span>, are independent if and only if <span class="math">\(f_X(x) \cdot f_Y(y) = f_{XY}(x,y)\)</span> for each and every <span class="math">\((x,y)\)</span> pair.<br /><span class="math">\[
+\]</span><br /><br /></p></li>
+<li><p>[4 points] State the defintion for independence of two continuous random variables and using this definition, determine whether or not <span class="math">\(X\)</span> and <span class="math">\(Y\)</span> are independent.<br /><br /><strong>Solution</strong><br />Definition: Two continuous random variables, <span class="math">\(X\)</span> and <span class="math">\(Y\)</span>, are independent if and only if <span class="math">\(f_X(x) \cdot f_Y(y) = f_{XY}(x,y)\)</span> for each and every <span class="math">\((x,y)\)</span> pair.<br /><span class="math">\[
 \begin{align*}
 f_X(x) \cdot f_Y(y) &amp;\stackrel{?}{=} f_{XY}(x,y) \\
 \left(x + \frac{1}{2}\right)\left(y + \frac{1}{2}\right) &amp;\stackrel{?}{=} x + y \\
 xy + \frac{1}{2}x + \frac{1}{2}y + \frac{1}{4} &amp;\neq x + y 
 \end{align*}
-\]</span></p></li>
-<li><p>[4 points] Find <span class="math">\(E(X)\)</span> and <span class="math">\(E(Y)\)</span>.<br /><strong>Solution</strong><br /><span class="math">\[
+\]</span><br /><br /></p></li>
+<li><p>[4 points] Find <span class="math">\(E(X)\)</span> and <span class="math">\(E(Y)\)</span>.<br /><br /><strong>Solution</strong><br /><span class="math">\[
 \begin{align*}
 E(X) &amp;= \int^1_0 x \cdot f_X(x) \ dx \\
  &amp;= \int^1_0 x \left(x + \frac{1}{2} \right) \ dx \\
  &amp;= \frac{1}{3} x^3 + \frac{1}{4} x^2 \bigg|^1_0 \\
  &amp;= \frac{7}{12} \\
 \end{align*}
-\]</span> The joint pdf is symmetric, so <span class="math">\(E(X)=E(Y)=\frac{7}{12}\)</span>.</p></li>
-<li><p>[4 points] Find the covariance between <span class="math">\(X\)</span> and <span class="math">\(Y\)</span>.<br /><strong>Solution</strong><br /><br /><span class="math">\(\text{Cov}(X, Y) = E(XY) - E(X) E(Y)\)</span><br /><span class="math">\(E(X)=E(Y)=\frac{7}{12}\)</span><br /><span class="math">\[
+\]</span> The joint pdf is symmetric, so <span class="math">\(E(X)=E(Y)=\frac{7}{12}\)</span>.<br /><br /><br /></p></li>
+<li><p>[4 points] Find the covariance between <span class="math">\(X\)</span> and <span class="math">\(Y\)</span>.<br /><br /><strong>Solution</strong><br /><span class="math">\(\text{Cov}(X, Y) = E(XY) - E(X) E(Y)\)</span><br /><span class="math">\(E(X)=E(Y)=\frac{7}{12}\)</span><br /><span class="math">\[
 \begin{align*}
 E(XY) &amp;= \int^1_0 \int^1_0 xy \cdot f(x,y) \ dx \ dy \\
   &amp;= \int^1_0 \int^1_0 xy (x + y) \ dx \ dy \\
@@ -146,8 +146,8 @@ E(XY) &amp;= \int^1_0 \int^1_0 xy \cdot f(x,y) \ dx \ dy \\
              &amp;= \frac{48-49}{144} \\
              &amp;= - \frac{1}{144}
 \end{align*}
-\]</span></p></li>
-<li><p>[4 points] Find <span class="math">\(\text{Var}(X)\)</span> and <span class="math">\(\text{Var}(Y)\)</span>.<br /><strong>Solution</strong><br /><br /><span class="math">\(\text{Var}(X) = E(X^2) - [E(X)]^2\)</span><br /><span class="math">\(E(X) = \frac{7}{12}\)</span> <span class="math">\[
+\]</span><br /><br /></p></li>
+<li><p>[4 points] Find <span class="math">\(\text{Var}(X)\)</span> and <span class="math">\(\text{Var}(Y)\)</span>.<br /><br /><strong>Solution</strong><br /><span class="math">\(\text{Var}(X) = E(X^2) - [E(X)]^2\)</span><br /><span class="math">\(E(X) = \frac{7}{12}\)</span> <span class="math">\[
 \begin{align*}
 E(X^2) &amp;= \int^1_0 x^2 \cdot f(x) \ dx \\
    &amp;= \int^1_0 x^2 \left(x + \frac{1}{2} \right) \ dx \\
@@ -162,8 +162,8 @@ E(X^2) &amp;= \int^1_0 x^2 \cdot f(x) \ dx \\
           &amp;= \frac{60 - 49}{144} \\
           &amp;= \frac{11}{144}
 \end{align*}
-\]</span> By symmetry, <span class="math">\(\text{Var}(X) = \text{Var}(Y)=\frac{11}{144}\)</span>.</p></li>
-<li><p>[2 points] Find the correlation coefficient between <span class="math">\(X\)</span> and <span class="math">\(Y\)</span>.<br /><strong>Solution</strong><br /><span class="math">\[
+\]</span> By symmetry, <span class="math">\(\text{Var}(X) = \text{Var}(Y)=\frac{11}{144}\)</span>.<br /><br /><br /></p></li>
+<li><p>[2 points] Find the correlation coefficient between <span class="math">\(X\)</span> and <span class="math">\(Y\)</span>.<br /><br /><strong>Solution</strong><br /><span class="math">\[
 \begin{align*}
 \rho_{XY} &amp;= \frac{\text{Cov}(X, Y)}{\sqrt{\text{Var}(X) \cdot \text{Var}(Y)}} \\
       &amp;= \frac{-\frac{1}{144}}{\sqrt{\frac{11}{144} \cdot \frac{11}{144}}} \\
