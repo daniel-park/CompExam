@@ -65,11 +65,11 @@ img {
 <h3 style="text-align:center;">
 Part II
 </h3>
+<h4 style="text-align:center;">
+Solution
+</h4>
 <p style="text-align:center;">
 Tuesday, November 17, 2015
-</p>
-<p style="text-align:center;">
-Solution.
 </p>
 <p><strong>3.</strong> The following data was generated from the GSS (General Social Survey) website cross-tabulating Newspaper Reading Habits, Highest Degree, and Gender. Data can be found in the tab-delimited text file <code>reading.txt</code>.</p>
 <pre class="r"><code># copy and paste
@@ -195,9 +195,8 @@ T.S. <span class="math inline">\(=15.165^2=229.9772\)</span><br />
 <em>p</em>-value=<code>1 - pchisq(q=229.9772, df=1)</code>= 0</li>
 </ol>
 <p>In <code>R</code>:</p>
-<pre class="r"><code>library(car)</code></pre>
-<pre><code>## Warning: package 'car' was built under R version 3.1.3</code></pre>
-<pre class="r"><code>Anova(reading.polr)</code></pre>
+<pre class="r"><code>library(car)
+Anova(reading.polr)</code></pre>
 <pre><code>## Analysis of Deviance Table (Type II tests)
 ## 
 ## Response: Newspaper
@@ -207,7 +206,7 @@ T.S. <span class="math inline">\(=15.165^2=229.9772\)</span><br />
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>“Gender difference: yes, <em>p</em>-value &lt; 0.0001”</p>
-<p>Testing the significance of proportionality.</p>
+<p><strong>TESTING FOR PROPORTIONAL ODDS</strong> (currently incorrect) Testing the significance of proportionality.</p>
 <pre class="r"><code>library(VGAM)</code></pre>
 <pre><code>## Loading required package: stats4
 ## Loading required package: splines
@@ -219,100 +218,10 @@ T.S. <span class="math inline">\(=15.165^2=229.9772\)</span><br />
 ##     logit</code></pre>
 <pre class="r"><code>reading.df$Newspaper &lt;- ordered(reading.df$Newspaper)
 proportional &lt;- vglm(Newspaper ~ Degree + Gender, family=cumulative(link=&quot;logit&quot;, parallel=TRUE), data=reading.df, weights=Count)
-summary(proportional) # yields same results as in part (a)</code></pre>
-<pre><code>## 
-## Call:
-## vglm(formula = Newspaper ~ Degree + Gender, family = cumulative(link = &quot;logit&quot;, 
-##     parallel = TRUE), data = reading.df, weights = Count)
-## 
-## Pearson residuals:
-##                   Min      1Q Median    3Q   Max
-## logit(P[Y&lt;=1]) -61.25 -12.289 -5.480 -1.41 54.64
-## logit(P[Y&lt;=2]) -66.56 -14.941 -4.147 12.28 41.84
-## logit(P[Y&lt;=3]) -67.85 -15.877  4.038 11.65 39.44
-## logit(P[Y&lt;=4]) -67.80   1.938  3.651  7.46 31.64
-## 
-## Coefficients:
-##               Estimate Std. Error z value             Pr(&gt;|z|)    
-## (Intercept):1  0.98238    0.04726  20.787 &lt; 0.0000000000000002 ***
-## (Intercept):2  1.91178    0.04823  39.635 &lt; 0.0000000000000002 ***
-## (Intercept):3  2.54452    0.04923  51.688 &lt; 0.0000000000000002 ***
-## (Intercept):4  3.58561    0.05231  68.546 &lt; 0.0000000000000002 ***
-## Degree1       -1.13291    0.05045 -22.455 &lt; 0.0000000000000002 ***
-## Degree2       -0.98609    0.04882 -20.199 &lt; 0.0000000000000002 ***
-## Degree3       -0.57476    0.06417  -8.957 &lt; 0.0000000000000002 ***
-## Degree4       -0.44225    0.05463  -8.096  0.00000000000000057 ***
-## GenderF       -0.34928    0.02296 -15.212 &lt; 0.0000000000000002 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Number of linear predictors:  4 
-## 
-## Names of linear predictors: 
-## logit(P[Y&lt;=1]), logit(P[Y&lt;=2]), logit(P[Y&lt;=3]), logit(P[Y&lt;=4])
-## 
-## Dispersion Parameter for cumulative family:   1
-## 
-## Residual deviance: 73097.44 on 191 degrees of freedom
-## 
-## Log-likelihood: -36548.72 on 191 degrees of freedom
-## 
-## Number of iterations: 4</code></pre>
-<pre class="r"><code>nonproportional &lt;- vglm(Newspaper ~ Degree + Gender, family=cumulative(link=&quot;logit&quot;, parallel=FALSE), data=reading.df, weights=Count)
-summary(nonproportional)</code></pre>
-<pre><code>## 
-## Call:
-## vglm(formula = Newspaper ~ Degree + Gender, family = cumulative(link = &quot;logit&quot;, 
-##     parallel = FALSE), data = reading.df, weights = Count)
-## 
-## Pearson residuals:
-##                   Min      1Q Median     3Q   Max
-## logit(P[Y&lt;=1]) -58.68 -12.628 -5.463 -1.204 55.72
-## logit(P[Y&lt;=2]) -69.02 -14.687 -3.612 12.059 39.29
-## logit(P[Y&lt;=3]) -63.18 -15.319  3.827 10.894 40.65
-## logit(P[Y&lt;=4]) -70.46   1.523  2.866  7.005 27.75
-## 
-## Coefficients:
-##               Estimate Std. Error z value             Pr(&gt;|z|)    
-## (Intercept):1  0.93689    0.04807  19.490 &lt; 0.0000000000000002 ***
-## (Intercept):2  1.98638    0.06357  31.246 &lt; 0.0000000000000002 ***
-## (Intercept):3  2.87431    0.08511  33.771 &lt; 0.0000000000000002 ***
-## (Intercept):4  3.97239    0.14526  27.346 &lt; 0.0000000000000002 ***
-## Degree1:1     -1.00760    0.05196 -19.392 &lt; 0.0000000000000002 ***
-## Degree1:2     -1.30491    0.06632 -19.677 &lt; 0.0000000000000002 ***
-## Degree1:3     -1.34853    0.08735 -15.438 &lt; 0.0000000000000002 ***
-## Degree1:4     -1.79388    0.14685 -12.215 &lt; 0.0000000000000002 ***
-## Degree2:1     -0.96642    0.04992 -19.358 &lt; 0.0000000000000002 ***
-## Degree2:2     -1.00882    0.06501 -15.519 &lt; 0.0000000000000002 ***
-## Degree2:3     -1.28433    0.08595 -14.943 &lt; 0.0000000000000002 ***
-## Degree2:4     -1.24885    0.14692  -8.500 &lt; 0.0000000000000002 ***
-## Degree3:1     -0.59315    0.06632  -8.943 &lt; 0.0000000000000002 ***
-## Degree3:2     -0.67606    0.08243  -8.201 0.000000000000000237 ***
-## Degree3:3     -0.56271    0.10908  -5.159 0.000000248913850250 ***
-## Degree3:4     -0.23237    0.19796  -1.174             0.240451    
-## Degree4:1     -0.47889    0.05579  -8.584 &lt; 0.0000000000000002 ***
-## Degree4:2     -0.44074    0.07263  -6.068 0.000000001291445264 ***
-## Degree4:3     -0.33534    0.09754  -3.438             0.000586 ***
-## Degree4:4     -0.17876    0.17046  -1.049             0.294333    
-## GenderF:1     -0.31185    0.02476 -12.596 &lt; 0.0000000000000002 ***
-## GenderF:2     -0.33526    0.02716 -12.346 &lt; 0.0000000000000002 ***
-## GenderF:3     -0.56321    0.03212 -17.535 &lt; 0.0000000000000002 ***
-## GenderF:4     -0.41525    0.04668  -8.896 &lt; 0.0000000000000002 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Number of linear predictors:  4 
-## 
-## Names of linear predictors: 
-## logit(P[Y&lt;=1]), logit(P[Y&lt;=2]), logit(P[Y&lt;=3]), logit(P[Y&lt;=4])
-## 
-## Dispersion Parameter for cumulative family:   1
-## 
-## Residual deviance: 72530.62 on 176 degrees of freedom
-## 
-## Log-likelihood: -36265.31 on 176 degrees of freedom
-## 
-## Number of iterations: 5</code></pre>
+#summary(proportional) # yields same results as in part (a)
+
+nonproportional &lt;- vglm(Newspaper ~ Degree + Gender, family=cumulative(link=&quot;logit&quot;, parallel=FALSE), data=reading.df, weights=Count)
+#summary(nonproportional)</code></pre>
 <p>The likelihood ratio test statistic: <span class="math display">\[
 - 2 \log \left( \frac{L_0}{L_1} \right) \sim \chi^2, df=1
 \]</span> This can be broken down: <span class="math display">\[
@@ -342,7 +251,7 @@ head(reading.df)</code></pre>
 ## 4      4         1      F  1162       1
 ## 5      5         1      F   685       1
 ## 6      1         2      F   762       1</code></pre>
-<p>Data has redundancies:</p>
+<p>Data has redundancies. For example, rows 1, 6, 11, and 16 are now the same level:</p>
 <pre class="r"><code>reading.df[c(1, 6, 11, 16), -2]</code></pre>
 <pre><code>##    Degree Gender Count monthly
 ## 1       1      F  1833       1
@@ -350,7 +259,7 @@ head(reading.df)</code></pre>
 ## 11      1      F   622       1
 ## 16      1      F   471       1</code></pre>
 <p>Merge redundant rows and add their counts:</p>
-<pre class="r"><code>reading.collapse &lt;- aggregate(formula=Count ~ Degree + Gender + monthly, data=reading.df[, -2], FUN=sum, na.rm=TRUE)
+<pre class="r"><code>reading.collapse &lt;- aggregate(formula=Count ~ Degree + Gender + monthly, data=reading.df, FUN=sum)
 reading.collapse</code></pre>
 <pre><code>##    Degree Gender monthly Count
 ## 1       5      M       0    18
@@ -405,8 +314,8 @@ summary(reading.binomial)</code></pre>
 ## Number of Fisher Scoring iterations: 6</code></pre>
 <p>The general model is: <span class="math display">\[
 \begin{align*}
-\text{logit}[\pi (x)] &amp;= \log \left(\frac{\pi(x)}{1 - \pi(X)}\right) \\
-  &amp;= \alpha + \beta_i x_i + beta_{female}x_{female}
+\text{logit}[\pi (x)] &amp;= \log \left(\frac{\pi(x)}{1 - \pi(x)}\right) \\
+  &amp;= \alpha + \beta_i x_i + \beta_{female}x_{female}
 \end{align*}
 \]</span> where</p>
 <ul>
