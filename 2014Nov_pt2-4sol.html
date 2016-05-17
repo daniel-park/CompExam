@@ -97,7 +97,7 @@ f_{Y|T}(y|T=t) = \frac{f_{T|Y}(t|Y=y) \cdot f_Y(y)}{f_T(t)}
 <li><span class="math">\(f_Y(y)\)</span>: <span class="math">\(Y=X_1\)</span>, so this is simply a normal pdf with mean <span class="math">\(\mu\)</span> and variance <span class="math">\(\sigma^2\)</span>: <span class="math">\[
 f_Y(y) = (2 \pi \sigma^2)^{-1/2} \exp\left\{- \frac{(y - \mu)^2}{2 \sigma^2} \right\}
 \]</span></li>
-<li><span class="math">\(f_T(t)\)</span>: <span class="math">\(T = Y + \sum_{i=2}^n\)</span>, so this is the pdf of the sum of <span class="math">\(n\)</span> iid normal distributions whose mean is <span class="math">\(n\mu\)</span> and variance <span class="math">\(n \sigma^2\)</span>: <span class="math">\[
+<li><span class="math">\(f_T(t)\)</span>: <span class="math">\(T = Y + \sum_{i=2}^n\)</span>, so this is the pdf of the sum of <span class="math">\(n\)</span> iid normal distributions whose mean is <span class="math">\(n\mu\)</span> and variance <span class="math">\(n \sigma^2\)</span> (variance of the sum of iid rv’s is equal to the sum of the variances): <span class="math">\[
 f_T(t) = (2\pi n \sigma^2)^{-1/2} \exp\left\{ - \frac{(t - n \mu)^2}{2n \sigma^2} \right\}
 \]</span></li>
 <li><span class="math">\(f_{T|Y}(t|Y=y)\)</span>: <span class="math">\(T = y + \sum_{i=2}^n\)</span>, so this pdf is like <span class="math">\(f_T(t)\)</span> except that it is the pdf of the sum of a constant plus <span class="math">\(n-1\)</span> iid normal distributions. It too follows a normal distribution. Given <span class="math">\(Y=y\)</span>, the mean is <span class="math">\[
@@ -115,7 +115,7 @@ E(T|Y=y) &amp;= E\left(y + \sum_{i=2}^n X_i \right)  \\
           &amp;= \sum_{i=2}^n \sigma^2                        \\
           &amp;= (n-1) \sigma^2
 \end{align*}
-\]</span> Note that <span class="math">\(y\)</span> is a constant and so it does not contribute to the variance, and <span class="math">\(X_i\)</span> are independent which means that the variance of the sum is equal to the sum of the variances. So <span class="math">\[
+\]</span> Note that the constant <span class="math">\(y\)</span> does not contribute to the variance, and <span class="math">\(X_i\)</span> are independent which means that the variance of the sum is equal to the sum of the variances. So <span class="math">\[
 f_{T|Y}(t|Y=y) = (2 \pi (n-1)\sigma^2)^{-1/2} \exp \left\{- \frac{(t - [y + (n-1)\mu])^2}{2(n-1) \sigma^2}\right\}
 \]</span> Putting all together, we have <span class="math">\[
 \begin{align*}
@@ -155,9 +155,9 @@ for (i in 1:B){
   y[i] &lt;- mean(samp)
 }
 var(w) </code></pre>
-<pre><code>## [1] 15.60683</code></pre>
+<pre><code>## [1] 15.55705</code></pre>
 <pre class="r"><code>var(y)</code></pre>
-<pre><code>## [1] 0.483514</code></pre>
+<pre><code>## [1] 0.4395581</code></pre>
 
 
 </div>
